@@ -1,0 +1,114 @@
+{template "content","header"}
+<!-- start Slider -->
+<div id="slider_background">
+<div id="slider_holder">
+<div id="slider-container">
+        <div class="static left">
+        <div class="relative">
+        <div id="ss-left"></div>
+        </div>
+</div>
+<div class="slider-wrapper">
+        <div class="vendeirinho-slider">
+        <div id="focus">
+        {pc:content  action="lists" catid="12" order="listorder ASC" num="10" return="info"}
+        <ul class="slides">
+        {loop $info $v}              
+        <li class="slide"><a href="{$v['url']}" title="{$v['title']}"><img src="{$v[thumb]}" alt="{$v['title']}"></a></li>
+        {/loop}
+        </ul>
+        {/pc}
+        </div>
+    </div>
+        <div class="static right">
+        <div class="relative">
+        <div id="ss-right"></div>
+        </div>
+    </div>					
+</div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+
+<!-- END Slider -->
+<!-- start content -->
+<div id="content_wrapper">
+<div id="midcaption">
+   	{pc:content  action="lists" catid="7" order="id DESC" num="1" return="info"}
+    {loop $info $r}
+    <p><strong>公告：</strong><a href="{$r['url']}">{$r['title']}</a></p>
+    {/loop}
+</div>
+<div class="mid"><a href="{$r['url']}" class="button white">了解更多</a></div>
+{/pc}
+<div class="clearfix"></div>
+<div id="lines" class="margin20"></div>
+<div class="breadcrumbs">
+<ul>
+<li><span>项目/产品介绍</span></li>
+</ul>
+</div>
+<div class="clear"></div>
+<div id="line"></div>
+{pc:content  action="lists" catid="8" order="id DESC" thumb="1" num="4" return="info"}
+<div class="content" id="width100">
+	<div id="main_column">
+      <div id="portfolio_box">
+       <ul>
+       {loop $info $v}
+          <li>
+		  <div class="image">
+          <a href="{$v['url']}" title="{$v['title']}"><img src="{thumb($v[thumb],220,140)}" alt="{$v['title']}"></a>
+		  </div>
+          <div class="project_info">
+            <h2><a href="{$v['url']}" title="{$v['title']}">{str_cut($v['title'],20)}</a></h2>
+            <h3>{str_cut($v['description'],30)}</h3>
+          </div>
+         </li>
+         {/loop}
+         </ul><!--END ul-->
+       </div>
+</div>	
+</div>
+{/pc}
+<link href="{CSS_PATH}pxgrids/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="{JS_PATH}pxgrids/jquery.fancybox-1.3.4.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$("a[data-id^='fancybox']").fancybox({
+        'overlayShow' : true,
+        'overlayColor'    : '#000',
+        'transitionIn'  : 'elastic',
+        'transitionOut' : 'elastic'       
+}); 
+$("a[data-id^='fancybox-linker']").fancybox({
+        'overlayShow' : true,
+        'overlayColor'    : '#000',
+        'transitionIn'  : 'elastic',
+        'transitionOut' : 'elastic',
+        'height' : 330,
+        'width' : 500   
+}); 
+});
+</script>
+<script type='text/javascript' src='{JS_PATH}pxgrids/custom-libraries.js?ver=1.0'></script>
+<div class="linker">
+<div class="breadcrumbs">
+<ul>
+<li><span>友情链接</span></li>
+</ul>
+</div>
+<div class="applylinker"><a href="{APP_PATH}index.php?m=link&c=index&a=register&siteid={$siteid}" class="iframe" data-id="fancybox-linker">申请链接</a></div>
+<div class="clear"></div>
+<div id="line"></div>
+  {pc:link  action="type_list" siteid="$siteid" order="listorder ASC" num="10" return="dat"}
+       <ul>
+       {loop $dat $v}
+          <li><a href="{$v[url]}" title="{$v[name]}" target="_blank">{$v[name]}</a></li>
+         {/loop}
+        </ul><!--END ul-->
+         {/pc}
+</div>
+</div>
+{template "content","footer"}
